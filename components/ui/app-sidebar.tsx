@@ -6,6 +6,7 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -17,7 +18,9 @@ import { Plus, Search, SearchIcon, Settings2Icon, SunIcon } from "lucide-react";
 import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import TopRightPanel from "../Theme-switch";
+import Logo from "@/public/logo.svg";
+import Image from "next/image";
+import panelSvg from "@/public/rightpanel.svg";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
@@ -83,6 +86,27 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <Plus className="h-4 w-4" />
         </Button> */}
       </div>
+      <AnimatePresence>
+        {state !== "collapsed" && (
+          <motion.div
+            key="panel-image"
+            initial={{ opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              transition: {
+                delay: 0.1,
+              },
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className="fixed right-0 top-4"
+          >
+            <Image src={panelSvg} alt="Panel Image" width={112} />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="p-1 fixed right-2 top-3 rounded-md bg-sidebar flex items-center">
         <Button
           variant="ghost"
@@ -100,10 +124,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SunIcon className="h-4 w-4" />
         </Button>
       </div>
-      <SidebarHeader>
-        <SidebarMenu></SidebarMenu>
+      <SidebarHeader className="text-[#CA0277] mt-1 flex items-center justify-center">
+        <Image src={Logo} alt="Logo Image" width={70} className="" />
       </SidebarHeader>
-      <SidebarContent></SidebarContent>
+      <SidebarContent>
+        <SidebarGroup>
+          <Button>New Chat</Button>
+        </SidebarGroup>
+      </SidebarContent>
       <SidebarFooter></SidebarFooter>
     </Sidebar>
   );

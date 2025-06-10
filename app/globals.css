@@ -51,7 +51,7 @@
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.705 0.213 47.604);
+  --primary: #aa4673;
   --primary-foreground: oklch(0.98 0.016 73.684);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -123,4 +123,18 @@
 
 .shape {
   transform: skew(20deg);
+}
+
+.sigmoid-left-edge {
+  /* Define the width and height as CSS variables for use in path() and Tailwind classes */
+  --rect-width: 300px;
+  --rect-height: 200px;
+
+  /* The core clip-path definition using SVG path data */
+  -webkit-clip-path: path(
+    "M 0 0 C 30 50, -30 150, 0 var(--rect-height) L var(--rect-width) var(--rect-height) L var(--rect-width) 0 Z"
+  );
+  clip-path: path(
+    "M 0 0 C 30 50, -30 150, 0 var(--rect-height) L var(--rect-width) var(--rect-height) L var(--rect-width) 0 Z"
+  );
 }

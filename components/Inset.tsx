@@ -10,15 +10,22 @@ const Inset = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full bg-sidebar">
       <div
         className={cn(
-          "bg-[#FAF4FA] min-h-screen overflow-scroll fixed border border-pink-500/50",
+          "bg-[#FAF4FA] min-h-screen overflow-auto fixed",
           "transition-all duration-300 ease-in-out",
+          // Mobile styles (applied by default)
+          "left-0 top-0 w-full rounded-none",
+          // Desktop styles
+
+          // When sidebar is expanded on desktop
           state === "expanded"
-            ? "left-[256px] top-4 rounded-[20px_0_0_0] w-[calc(100%-256px)]"
-            : "left-0 top-0 rounded-none border-none w-full"
+            ? "md:left-[256px] md:rounded-tl-[20px] md:border top-4  md:border-pink-500/30 md:w-[calc(100%-256px)]"
+            : "top-0"
         )}
       >
-        <div className="h-full flex justify-center">
-          <div className="w-[770px] h-[200vh] bg-amber-300">{children}</div>
+        <div className="h-full flex justify-center px-4 md:px-0">
+          <div className="w-full max-w-[770px] min-w-0 h-[200vh] bg-amber-300">
+            {children}
+          </div>
         </div>
       </div>
     </div>
